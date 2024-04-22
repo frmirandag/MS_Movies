@@ -1,5 +1,6 @@
 package com.example.bdget.controller;
-/*
+
+
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -22,7 +23,6 @@ public class PeliculaControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-
     @MockBean
     private PeliculaService peliculaService;
 
@@ -42,7 +42,7 @@ public class PeliculaControllerTest {
         // Mock del servicio
         when(peliculaService.getAllPeliculas()).thenReturn(peliculas);
 
-        // Ejecución de la solicitud HTTP
+        // Ejecución de la solicitud HTTP y verificación de los resultados
         mockMvc.perform(get("/peliculas")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -53,4 +53,3 @@ public class PeliculaControllerTest {
                 .andExpect(jsonPath("$[1].titulo").value("Avatar"));
     }
 }
-*/

@@ -25,6 +25,7 @@ public class PeliculaServiceTest {
     @Mock
     private PeliculaRepository peliculaRepositoryMock;
 
+    // Prueba para verificar la creación de una película
     @Test
     public void testCrearPelicula() {
         // Se crea una instancia de Pelicula para simular los datos de entrada
@@ -45,6 +46,7 @@ public class PeliculaServiceTest {
         assertEquals(peliculaEntrada.getDirector(), peliculaCreada.getDirector());
     }
 
+    // Prueba para verificar la obtención de una película por un ID existente
     @Test
     public void testObtenerPeliculaPorIdExistente() {
         // Se crea una instancia de Pelicula para simular los datos de la película existente
@@ -63,6 +65,7 @@ public class PeliculaServiceTest {
         assertEquals("El Padrino", peliculaOpt.get().getTitulo());
     }
 
+    // Prueba para verificar la obtención de una película por un ID no existente
     @Test
     public void testObtenerPeliculaPorIdNoExistente() {
         // Se configura el comportamiento esperado del repositorio mock para devolver un Optional vacío
