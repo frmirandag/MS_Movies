@@ -1,6 +1,8 @@
 package com.example.bdget.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -61,12 +63,37 @@ public class PeliculaController {
         }
         return ResponseEntity.ok(createdPelicula);
     }
-
+/*SE COMENTA ESTA PARTE YA QUE NO FUNCIONABA EL PUT 
     @PutMapping("/{id}")
     public ResponseEntity<Object> updatePelicula(@PathVariable @NotNull @Min(1) Long id, @Valid @RequestBody Pelicula pelicula) {
         Pelicula updatedPelicula = peliculaService.updatePelicula(id, pelicula);
         if (updatedPelicula == null) {
             log.error("No se encontró la película con ID {}", id);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponse("No se encontró la película con ID " + id));
+        }
+        return ResponseEntity.ok(updatedPelicula);
+    }
+
+@PutMapping("/peliculas/{id}")
+    public ResponseEntity<Object> updatePelicula(@PathVariable @NotNull @Min(1) Long id, @Valid @RequestBody Pelicula pelicula) {
+        Pelicula updatedPelicula = peliculaService.updatePelicula(id, pelicula);
+        if (updatedPelicula == null) {
+            log.error("No se encontró la película con ID {}", id);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponse("No se encontró la película con ID " + id));
+        }
+        
+        // Agregar enlaces HATEOAS
+        EntityModel<Pelicula> entityModel = EntityModel.of(updatedPelicula);
+        entityModel.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(this.getClass()).getPeliculaById(id)).withSelfRel());
+        entityModel.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(this.getClass()).getAllPeliculas()).withRel("all-peliculas"));
+
+        return ResponseEntity.ok(entityModel);
+    }
+    */
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> updatePelicula(@PathVariable Long id, @RequestBody Pelicula pelicula) {
+        Pelicula updatedPelicula = peliculaService.updatePelicula(id, pelicula);
+        if (updatedPelicula == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponse("No se encontró la película con ID " + id));
         }
         return ResponseEntity.ok(updatedPelicula);

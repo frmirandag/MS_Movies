@@ -13,25 +13,25 @@ import com.example.bdget.model.Pelicula;
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class PeliculaRepositoryTest {
+
     @Autowired
     private PeliculaRepository peliculaRepository;
 
     @Test
     public void guardarPeliculaTest() {
-        // Se crea una película
+        // Crear una película
         Pelicula pelicula = new Pelicula();
-        pelicula.setTitulo("Titanic");
+        pelicula.setTitulo("Titanic 2");
         pelicula.setYear(1997);
         pelicula.setDirector("James Cameron");
         pelicula.setGenero("Romance");
         pelicula.setSinopsis("Una historia de amor en el desafortunado viaje inaugural del RMS Titanic.");
-
-        // Se guarda la película en la base de datos
+        // Guardar la película en la base de datos
         Pelicula resultado = peliculaRepository.save(pelicula);
 
-        // Se verifica que el resultado tenga un ID asignado y que los detalles de la película sean correctos
+        // Verificar que se haya asignado un ID y que los detalles de la película sean correctos
         assertNotNull(resultado.getId());
-        assertEquals("Titanic", resultado.getTitle());
+        assertEquals("Titanic 2", resultado.getTitulo());
         assertEquals(1997, resultado.getYear());
         assertEquals("James Cameron", resultado.getDirector());
         assertEquals("Romance", resultado.getGenero());

@@ -40,7 +40,7 @@ public class PeliculaServiceTest {
         Pelicula peliculaCreada = peliculaService.createPelicula(peliculaEntrada);
 
         // Se verifica que la película creada tenga los mismos atributos que la película de entrada
-        assertEquals(peliculaEntrada.getTitle(), peliculaCreada.getTitle());
+        assertEquals(peliculaEntrada.getTitulo(), peliculaCreada.getTitulo());
         assertEquals(peliculaEntrada.getYear(), peliculaCreada.getYear());
         assertEquals(peliculaEntrada.getDirector(), peliculaCreada.getDirector());
     }
@@ -60,7 +60,7 @@ public class PeliculaServiceTest {
 
         // Se verifica que se obtenga la película correctamente y que tenga el título esperado
         assertTrue(peliculaOpt.isPresent());
-        assertEquals("El Padrino", peliculaOpt.get().getTitle());
+        assertEquals("El Padrino", peliculaOpt.get().getTitulo());
     }
 
     @Test
